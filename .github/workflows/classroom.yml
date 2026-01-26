@@ -61,6 +61,52 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 5
+    - name: Compile ArraySum
+      id: compile-arraysum
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Compile ArraySum
+        setup-command: ''
+        command: g++ --std=c++17 ArraySum.cpp -o ArraySum
+        timeout: 10
+        max-score: 5
+    - name: Run ArraySum
+      id: run-arraysum
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Run ArraySum
+        setup-command: ''
+        command: "./ArraySum"
+        input: ''
+        expected-output: |-
+          Sum of int array: 10
+          Sum of double array: 6.6
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
+    - name: Compile ClassPair
+      id: compile-classpair
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Compile ClassPair
+        setup-command: ''
+        command: g++ --std=c++17 ClassPair.cpp -o ClassPair
+        timeout: 10
+        max-score: 5
+    - name: Run ClassPair
+      id: run-classpair
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: Run ClassPair
+        setup-command: ''
+        command: "./ClassPair"
+        input: ''
+        expected-output: |-
+          (5, 2.5)
+          (Age, 20)
+        comparison-method: contains
+        timeout: 10
+        max-score: 5
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
@@ -68,5 +114,9 @@ jobs:
         RUN-MYMAX_RESULTS: "${{steps.run-mymax.outputs.result}}"
         COMPILE-BOX_RESULTS: "${{steps.compile-box.outputs.result}}"
         RUN-BOX_RESULTS: "${{steps.run-box.outputs.result}}"
+        COMPILE-ARRAYSUM_RESULTS: "${{steps.compile-arraysum.outputs.result}}"
+        RUN-ARRAYSUM_RESULTS: "${{steps.run-arraysum.outputs.result}}"
+        COMPILE-CLASSPAIR_RESULTS: "${{steps.compile-classpair.outputs.result}}"
+        RUN-CLASSPAIR_RESULTS: "${{steps.run-classpair.outputs.result}}"
       with:
-        runners: compile-mymax,run-mymax,compile-box,run-box
+        runners: compile-mymax,run-mymax,compile-box,run-box,compile-arraysum,run-arraysum,compile-classpair,run-classpair
